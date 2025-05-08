@@ -88,3 +88,17 @@ h1 {
 ul {
   list-style: none;
 }
+/*link:=Selektierung von a(naker) mit href; visited:= wurde angeklickt*/
+.source:link,
+:visited {
+  color: #a8a29e;
+  text-decoration: none;
+  margin-left: 12px;
+  transition: 0.3s;
+}
+
+/*active:=Klick gedrückt halten*/
+.source:hover,
+:active {
+  color: #3b82f6;
+}
