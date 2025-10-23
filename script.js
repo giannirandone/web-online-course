@@ -46,13 +46,33 @@ const CATEGORIES = [
 
 //Selecting DOM EElements
 const btn = document.querySelector(".btn-open");
+const contactBtn = document.querySelector(".btn-contact");
 const form = document.querySelector(".fact-form");
 const factsList = document.querySelector(".facts-list");
 
 //Create DOM Elemts: Render facts in list
 factsList.innerHTML = "";
-createFactsList(initialFacts);
 
+//Load data from Supabase
+loadFacts();
+
+async function loadFacts() {
+  const res = await fetch(
+    "https://hwfgktjilvrinhiptfaj.supabase.co/rest/v1/facts",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3ZmdrdGppbHZyaW5oaXB0ZmFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjYzNjgsImV4cCI6MjA2MzcwMjM2OH0.vVml3K4EcfBoWw-ffiMEWig9ZsVkwutjIiqZJhAGQHU",
+        authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3ZmdrdGppbHZyaW5oaXB0ZmFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMjYzNjgsImV4cCI6MjA2MzcwMjM2OH0.vVml3K4EcfBoWw-ffiMEWig9ZsVkwutjIiqZJhAGQHU",
+      },
+    }
+  );
+  const data = await res.json();
+  console.log(res);
+}
+
+//createFactsList(initialFacts); //das übergebene Array wird gelooped mit '.map()'
 function createFactsList(dataArray) {
   //factsList.insertAdjacentHTML("afterbegin", "<li>Jonas</li>");
   const htmlArr = dataArray.map(
@@ -63,18 +83,16 @@ function createFactsList(dataArray) {
             class="source"
             href="${fact.source}"
             target="_blank"
-            >(Source)</a
-          >
+            >(Source)</a>
             </p>
               <span class="tag" style="background-color: #3b82f6"
               >${fact.category}</span>
     </li>`
   );
+  console.log(htmlArr);
+  const html = htmlArr.join("");
+  factsList.insertAdjacentHTML("afterbegin", html);
 }
-
-console.log(htmlArr);
-const html = htmlArr.join("");
-factsList.insertAdjacentHTML("afterbegin", html);
 
 //Toggle form visibility
 btn.addEventListener("click", function () {
@@ -85,6 +103,11 @@ btn.addEventListener("click", function () {
     form.classList.add("hidden");
     btn.textContent = "Share a fact";
   }
+});
+
+//Contact button functionality
+contactBtn.addEventListener("click", function () {
+  window.location.href = "profil-page.html";
 });
 
 /*
