@@ -116,6 +116,49 @@
 
     <footer class="footer">
       <button class="btn btn-contact">Mein Kontakt</button>
+
+      <!-- CAPTCHA Modal -->
+      <div id="captchaModal" class="captcha-modal hidden">
+        <div class="captcha-container">
+          <h3>Verifizierung erforderlich</h3>
+          <p id="captchaInstruction">
+            Bitte lösen Sie das CAPTCHA, um fortzufahren:
+          </p>
+
+          <!-- Loading Indikator -->
+          <div id="captchaLoading" class="captcha-loading">
+            <div class="loading-spinner"></div>
+            <p>Lade CAPTCHA...</p>
+          </div>
+
+          <div class="captcha-challenge hidden" id="captchaChallenge">
+            <div class="captcha-question">
+              <span id="captchaQuestion"></span>
+            </div>
+
+            <div class="captcha-images" id="captchaImages">
+              <!-- Bilder werden hier dynamisch eingefügt -->
+            </div>
+
+            <div class="captcha-actions">
+              <button id="captchaSubmit" class="btn btn-captcha">
+                Verifizieren
+              </button>
+              <button id="captchaRefresh" class="btn btn-captcha-refresh">
+                🔄 Neue Aufgabe
+              </button>
+            </div>
+
+            <div class="captcha-error hidden" id="captchaError">
+              Falsche Auswahl! Bitte versuchen Sie es erneut.
+            </div>
+          </div>
+
+          <button id="captchaClose" class="btn btn-captcha-close">
+            Abbrechen
+          </button>
+        </div>
+      </div>
     </footer>
 
     <script src="js/script.js"></script>
